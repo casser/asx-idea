@@ -633,12 +633,10 @@ class AsxLexerOld implements FlexLexer {
                     this.beginInitial();
                     return AsxTokenTypes.GWT_FIELD_OR_METHOD;
                 case 66:
-                    System.out.println(this.yycharat(0)+" "+this.nestedBlocksCount);
                     return AsxTokenTypes.STRING_TEMPLATE_PART;
                 case 67:
-                    //System.out.println(this.yycharat(0)+" "+this.nestedBlocksCount);
-                    if( this.yycharat(0) == 96) {//34
-                        //--this.nestedBlocksCount;
+                    if( this.yycharat(0) == 96) {
+                        --this.nestedBlocksCount;
                         this.beginInitial();
                         return AsxTokenTypes.BACKQUOTE;
                     }

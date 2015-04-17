@@ -189,7 +189,12 @@ public class AsxExpressionParser<T extends AsxSyntaxParserBase> extends AsxAbstr
             if(this.builder.getTokenType() == AsxTokenTypes.DOLLAR) {
                 this.builder.advanceLexer();
                 if(this.builder.getTokenType() == AsxTokenTypes.LBRACE) {
-                    this.getStatementParser().parseBlock();
+                    this.builder.advanceLexer();
+                    if(!this.parseAssignmentExpression(true, false)) {
+                        this.builder.error(JSBundle.message("javascript.parser.message.expected.expression"));
+                    }
+
+                    checkMatches(this.builder, AsxTokenTypes.RBRACE, "javascript.parser.message.expected.rbrace");
                 }
             } else {
                 this.builder.error(JSBundle.message("javascript.parser.message.missing.backquote"));
@@ -594,7 +599,7 @@ public class AsxExpressionParser<T extends AsxSyntaxParserBase> extends AsxAbstr
     }
 
     protected void parsePropertyInitializer() {
-        if (this.builder.getTokenType() == AsxTokenTypes.COLON) {
+        if(this.builder.getTokenType() == AsxTokenTypes.COLON) {
             this.builder.advanceLexer();
             if(!this.parseAssignmentExpression(true, true)) {
                 this.builder.error(JSBundle.message("javascript.parser.message.expected.expression", new Object[0]));
@@ -867,7 +872,7 @@ public class AsxExpressionParser<T extends AsxSyntaxParserBase> extends AsxAbstr
             this.builder.advanceLexer();
             identifier.done(JSElementTypes.E4X_NAMESPACE_REFERENCE);
             IElementType tokenType = this.builder.getTokenType();
-            if (tokenType != AsxTokenTypes.ANY_IDENTIFIER && !this.isIdentifierToken(tokenType)) {
+            if(tokenType != AsxTokenTypes.ANY_IDENTIFIER && !this.isIdentifierToken(tokenType)) {
                 if(!expressionContext || tokenType != AsxTokenTypes.LBRACKET) {
                     this.builder.error(JSBundle.message("javascript.parser.message.expected.name"));
                 }
