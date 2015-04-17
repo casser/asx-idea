@@ -1,0 +1,72 @@
+<idea-plugin version="2">
+  <id>asx.idea.plugin</id>
+  <name>ASX</name>
+  <version>1.0</version>
+  <vendor email="sergey.mamyan@gmail.com" url="https://github.com/casser/asx-idea">Sergey Mamyan</vendor>
+
+  <description>
+    <![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </description>
+
+  <change-notes>
+    <![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+  <depends>JavaScript</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <sdkType id="AsxSdkType" implementation="asx.idea.plugin.project.AsxSdkType"/>
+    <moduleType id="AsxModuleType" implementationClass="asx.idea.plugin.project.AsxModuleType"/>
+    <fileTypeFactory id="AsxTypeFileTypeFactory" implementation="asx.idea.plugin.project.AsxFileTypeFactory"/>
+    <internalFileTemplate name="AsxClass"/>
+    <colorSettingsPage implementation="asx.idea.plugin.language.AsxSyntaxHighlighterSettings"/>
+    <lang.syntaxHighlighterFactory key="ASX" implementationClass="asx.idea.plugin.language.AsxSyntaxHighlighterFactory"/>
+    <lang.parserDefinition language="ASX" implementationClass="asx.idea.plugin.language.AsxParserDefinition"/>
+    <!--lang.formatter language="ASX" implementationClass="asx.idea.plugin.language.AsxSyntaxFormatter"/>
+    <lang.foldingBuilder language="ASX" implementationClass="asx.idea.plugin.language.AsxSyntaxFoldingBuilder"/>
+
+    <resolveScopeProvider implementation="asx.idea.plugin.language.completion.AsxResolveScopeProvider"/>
+    <completion.contributor language="ASX" implementationClass="asx.idea.plugin.language.completion.AsxCompletionContributor"/>
+    <lang.psiStructureViewFactory language="ASX" implementationClass="com.intellij.lang.typescript.structureView.TypeScriptStructureViewBuilderFactory"/>
+    <stubElementTypeHolder class="asx.idea.plugin.language.AsxElementTypes"/>
+    <annotator language="ASX" implementationClass="com.intellij.lang.javascript.ecmascript6.TypeScriptAnnotatingVisitor"/>
+    <psi.referenceContributor implementation="asx.idea.plugin.language.completion.AsxReferenceContributor"/>
+    <completion.confidence language="ASX" implementationClass="com.intellij.lang.javascript.completion.JSAutoCompletionPopupPolicy" order="last"/>
+    <lang.refactoringSupport language="ASX" implementationClass="com.intellij.lang.typescript.refactoring.TypeScriptRefactoringSupportProvider" id="TypeScriptRefactoringSupportProvider"/>
+    <lang.formatter language="ASX" implementationClass="com.intellij.lang.typescript.formatter.TypeScriptFormattingModelBuilder"/>
+    <projectStructure.sourceRootEditHandler  implementation="asx.idea.plugin.project.AsxSourceRootEditHandler"/-->
+  </extensions>
+  <extensions defaultExtensionNs="JavaScript">
+    <!--elementScopeProvider language="ASX" implementationClass="asx.idea.plugin.language.completion.AsxResolveScopeProvider"/>
+    <dialectSpecificHandlersFactory language="ASX" implementationClass="asx.idea.plugin.language.AsxHandlersFactory"/>
+    <smartCompletionContributor language="ASX" implementationClass="asx.idea.plugin.language.completion.AsxSmartCompletionContributor"/-->
+  </extensions>
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+
+  </project-components>
+
+  <actions>
+    <action id="Haxe.NewAsxClass" class="asx.idea.plugin.actions.AsxCreateClassAction" text="Asx Class" description="Create new Asx class/interface/enum">
+      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile"/>
+    </action>
+  </actions>
+
+</idea-plugin>

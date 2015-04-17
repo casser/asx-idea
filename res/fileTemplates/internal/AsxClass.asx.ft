@@ -1,0 +1,5 @@
+class ${NAME} {
+    public constructor(){
+
+    }
+}
